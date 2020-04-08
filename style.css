@@ -4,6 +4,24 @@
     grid-template-columns: repeat(3, 1fr);
     width: 450px;
     height: 450px;
+    color: white;
+}
+#restart{
+    position: absolute;
+    left: 475px;
+    top: 225px;
+    border: none;
+    width: 100px;
+    height: 60px;
+    background-color: green;
+    font-family: sans-serif;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+
+}
+#restart:hover{
+    transform: scale(1.1);
 }
 .cell{
     box-sizing: border-box;
@@ -16,8 +34,22 @@
     line-height: 150px;
 }
 .cross{
-    color: blue;
+    color: rgb(13, 85, 168);
 }
 .circle{
     color: red;
+}
+.crossHover{
+    color: white;
+}
+.crossHover:hover{
+    color: rgb(119, 183, 255);
+    transition: 0.5s;
+}
+.circleHover{
+    color: white;
+}
+.circleHover:hover{
+    color: red;
+    transition-delay: 1;
 }
