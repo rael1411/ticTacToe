@@ -21,47 +21,50 @@ const render = function(){
     let turn = player1.name;
     gameBoard.forEach((cell, index) => {
         let element = document.createElement("div");
-        if (cell = "empty"){
+        if (cell === "empty"){
             element.textContent = "";
         }
         element.id = index;
         element.className = "cell";
         
         element.addEventListener("mouseover", function(e){
-            if (turn === player1.name)
-            {
-                if (player1.symbol === "cross")
+            if (gameBoard[element.id] === "empty" && gameState() === ""){
+                if (turn === player1.name)
                 {
-                    element.innerHTML = "X";
-                    element.classList.add("crossHover");
-                    element.classList.remove("circleHover");
+                    if (player1.symbol === "cross")
+                    {
+                        element.innerHTML = "X";
+                        element.classList.add("crossHover");
+                        element.classList.remove("circleHover");
+                    }
+                    else
+                    {
+                        element.innerHTML = "O";
+                        element.classList.add("circleHover");
+                        element.classList.remove("crossHover");
+                    }
                 }
-                else
-                {
-                    element.innerHTML = "O";
-                    element.classList.add("circleHover");
-                    element.classList.remove("crossHover");
-                }
-            }
-            else {
-                if (player2.symbol === "circle")
-                {
-                    element.innerHTML = "O";
-                    element.classList.add("circleHover");
-                    element.classList.remove("crossHover");
+                else {
+                    if (player2.symbol === "circle")
+                    {
+                        element.innerHTML = "O";
+                        element.classList.add("circleHover");
+                        element.classList.remove("crossHover");
 
-                }
-                else
-                {
-                    element.innerHTML = "X";
-                    element.classList.add("crossHover");
-                    element.classList.remove("circleHover");
+                    }
+                    else
+                    {
+                        element.innerHTML = "X";
+                        element.classList.add("crossHover");
+                        element.classList.remove("circleHover");
+                    }
                 }
             }
             console.log(gameState());
         });
         element.addEventListener("click", function(e){
-            if (element.textContent === "" && gameState() === ""){
+            console.log("clicked");
+            if (gameBoard[element.id] === "empty" && gameState() === ""){
                 if (turn === player1.name)
                 {
                     if (player1.symbol === "cross")
@@ -70,6 +73,8 @@ const render = function(){
                         gameBoard[element.id] = "cross";
                         turn = player2.name;
                         element.classList.add("cross");
+                        element.classList.remove("crossHover");
+                        element.classList.remove("circleHover");
                     }
                     else
                     {
@@ -77,6 +82,8 @@ const render = function(){
                         gameBoard[element.id] = "circle";
                         turn = player2.name;
                         element.classList.add("circle");
+                        element.classList.remove("crossHover");
+                        element.classList.remove("circleHover");
                     }
                 } else {
                     if (player2.symbol === "circle")
@@ -85,6 +92,8 @@ const render = function(){
                         gameBoard[element.id] = "circle";
                         turn = player1.name;
                         element.classList.add("circle");
+                        element.classList.remove("crossHover");
+                        element.classList.remove("circleHover");
                     }
                     else
                     {
@@ -92,6 +101,8 @@ const render = function(){
                         gameBoard[element.id] = "cross";
                         turn = player1.name;
                         element.classList.add("cross");
+                        element.classList.remove("crossHover");
+                        element.classList.remove("circleHover");
                     }
                 }
                 console.log(gameState());
