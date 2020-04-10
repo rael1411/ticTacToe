@@ -13,12 +13,29 @@ const player = (name, symbol) => {
 }
 var player1 = player("player1", "cross");
 var player2 = player("player2", "circle");
+var turn = player1.name;
+
 const container = document.querySelector("#container");
 const winner = document.querySelector("#winner");
+const submitButton = document.querySelector("#submitButton");
+submitButton.addEventListener("click", (e)=> {
+    e.preventDefault();
+    let name1 = document.getElementById("name1").value;
+    let name2 = document.getElementById("name2").value;
+    if (turn === player1.name){
+        turn = name1;
+    }
+    else if (turn === player2.name){
+        turn = name2;
+    }
+    player1.name = name1;
+    player2.name = name2;
+});
+
 //creates the gameboard based on the gameBoard function
 const render = function(){
     container.innerHTML = "";
-    let turn = player1.name;
+    turn = player1.name;
     gameBoard.forEach((cell, index) => {
         let element = document.createElement("div");
         if (cell === "empty"){
@@ -60,10 +77,9 @@ const render = function(){
                     }
                 }
             }
-            console.log(gameState());
         });
         element.addEventListener("click", function(e){
-            console.log("clicked");
+            //cleaning the board of hover elements if the game is over
             if (gameBoard[element.id] === "empty" && gameState() === ""){
                 if (turn === player1.name)
                 {
@@ -105,7 +121,6 @@ const render = function(){
                         element.classList.remove("circleHover");
                     }
                 }
-                console.log(gameState());
                 if (gameState() != ""){
                     let champion = document.createElement("p");
                     champion.textContent = `The winner is: ${gameState()}!` ;
@@ -113,6 +128,10 @@ const render = function(){
                 }
             }
         });
+        element.addEventListener("mouseout", function(){
+            element.classList.remove("circleHover");
+            element.classList.remove("crossHover");
+        })
 
     container.appendChild(element);
     });
